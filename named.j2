@@ -1,0 +1,18 @@
+#jinja2:variable_start_string:'[[',variable_end_string:']]'
+options {
+	directory "/var/named/slaves";
+	allow-query {localhost; 192.168.122.0/24;};
+	forwarders {192.168.122.1;};
+	recursion yes;
+	allow-recursion {localhost; 192.168.122.0/24;};
+};
+zone "[[zonename]]" {
+	type slave;
+	masters {[[master]];};
+	file "[[zonename]].fwd";
+};
+zone "122.168.192.in-addr.arpa" {
+	type slave;
+	masters {[[master]];};
+	file "[[zonename]].rev";
+};
